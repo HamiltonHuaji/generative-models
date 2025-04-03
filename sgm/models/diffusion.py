@@ -2,7 +2,7 @@ import math
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 import torch
 from omegaconf import ListConfig, OmegaConf
 from safetensors.torch import load_file as load_safetensors

@@ -1,4 +1,4 @@
-from pytorch_lightning import seed_everything
+from lightning.pytorch import seed_everything
 
 from scripts.demo.streamlit_helpers import *
 

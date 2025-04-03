@@ -3,7 +3,7 @@ from typing import Optional
 import torchdata.datapipes.iter
 import webdataset as wds
 from omegaconf import DictConfig
-from pytorch_lightning import LightningDataModule
+from lightning.pytorch import LightningDataModule
 
 try:
     from sdata import create_dataset, create_dummy_dataset, create_loader

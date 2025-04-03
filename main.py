@@ -8,7 +8,7 @@ from inspect import Parameter
 from typing import Union
 
 import numpy as np
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 import torch
 import torchvision
 import wandb
@@ -17,11 +17,11 @@ from natsort import natsorted
 from omegaconf import OmegaConf
 from packaging import version
 from PIL import Image
-from pytorch_lightning import seed_everything
-from pytorch_lightning.callbacks import Callback
-from pytorch_lightning.loggers import WandbLogger
-from pytorch_lightning.trainer import Trainer
-from pytorch_lightning.utilities import rank_zero_only
+from lightning.pytorch import seed_everything
+from lightning.pytorch.callbacks import Callback
+from lightning.pytorch.loggers import WandbLogger
+from lightning.pytorch.trainer import Trainer
+from lightning.pytorch.utilities import rank_zero_only
 
 from sgm.util import exists, instantiate_from_config, isheatmap
 
@@ -667,7 +667,7 @@ if __name__ == "__main__":
         # default logger configs
         default_logger_cfgs = {
             "wandb": {
-                "target": "pytorch_lightning.loggers.WandbLogger",
+                "target": "lightning.pytorch.loggers.WandbLogger",
                 "params": {
                     "name": nowname,
                     # "save_dir": logdir,
@@ -679,7 +679,7 @@ if __name__ == "__main__":
                 },
             },
             "csv": {
-                "target": "pytorch_lightning.loggers.CSVLogger",
+                "target": "lightning.pytorch.loggers.CSVLogger",
                 "params": {
                     "name": "testtube",  # hack for sbord fanatics
                     "save_dir": logdir,
@@ -711,7 +711,7 @@ if __name__ == "__main__":
         # modelcheckpoint - use TrainResult/EvalResult(checkpoint_on=metric) to
         # specify which metric is used to determine best models
         default_modelckpt_cfg = {
-            "target": "pytorch_lightning.callbacks.ModelCheckpoint",
+            "target": "lightning.pytorch.callbacks.ModelCheckpoint",
             "params": {
                 "dirpath": ckptdir,
                 "filename": "{epoch:06}",
@@ -733,7 +733,7 @@ if __name__ == "__main__":
 
         # https://pytorch-lightning.readthedocs.io/en/stable/extensions/strategy.html
         # default to ddp if not further specified
-        default_strategy_config = {"target": "pytorch_lightning.strategies.DDPStrategy"}
+        default_strategy_config = {"target": "lightning.pytorch.strategies.DDPStrategy"}
 
         if "strategy" in lightning_config:
             strategy_cfg = lightning_config.strategy
@@ -771,7 +771,7 @@ if __name__ == "__main__":
                 "params": {"batch_frequency": 1000, "max_images": 4, "clamp": True},
             },
             "learning_rate_logger": {
-                "target": "pytorch_lightning.callbacks.LearningRateMonitor",
+                "target": "lightning.pytorch.callbacks.LearningRateMonitor",
                 "params": {
                     "logging_interval": "step",
                     # "log_momentum": True
@@ -792,7 +792,7 @@ if __name__ == "__main__":
             )
             default_metrics_over_trainsteps_ckpt_dict = {
                 "metrics_over_trainsteps_checkpoint": {
-                    "target": "pytorch_lightning.callbacks.ModelCheckpoint",
+                    "target": "lightning.pytorch.callbacks.ModelCheckpoint",
                     "params": {
                         "dirpath": os.path.join(ckptdir, "trainstep_checkpoints"),
                         "filename": "{epoch:06}-{step:09}",

@@ -5,7 +5,7 @@ from abc import abstractmethod
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import pytorch_lightning as pl
+import lightning.pytorch as pl
 import torch
 import torch.nn as nn
 from einops import rearrange

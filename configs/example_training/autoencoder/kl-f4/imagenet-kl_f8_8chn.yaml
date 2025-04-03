@@ -76,7 +76,7 @@ data:
 
 lightning:
   strategy:
-    target: pytorch_lightning.strategies.DDPStrategy
+    target: lightning.pytorch.strategies.DDPStrategy
     params:
       find_unused_parameters: True
 
